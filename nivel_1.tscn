@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://b8cscaur1iub3"]
+[gd_scene load_steps=35 format=3 uid="uid://b8cscaur1iub3"]
 
+[ext_resource type="Script" path="res://nivel_1.gd" id="1_c0tyq"]
 [ext_resource type="Texture2D" uid="uid://bhtq8o15cswey" path="res://Recursos Juego2D básico/fondo/back.png" id="1_k8utu"]
 [ext_resource type="Texture2D" uid="uid://dg2kq1rh73mcv" path="res://Recursos Juego2D básico/fondo/middle.png" id="2_co26t"]
 [ext_resource type="PackedScene" uid="uid://clkiyv7tvyupa" path="res://suelo.tscn" id="3_u6hf1"]
@@ -185,7 +186,15 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwn2g"]
+radius = 23.0
+height = 62.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8uhcb"]
+size = Vector2(53, 51)
+
 [node name="Nivel1" type="Node"]
+script = ExtResource("1_c0tyq")
 
 [node name="Fondo" type="Sprite2D" parent="."]
 position = Vector2(671.125, 318)
@@ -225,3 +234,20 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_sor4r")
 animation = &"run"
 frame_progress = 0.544986
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rana"]
+position = Vector2(298, 583)
+shape = SubResource("CapsuleShape2D_bwn2g")
+
+[node name="Area2D" type="Area2D" parent="Rana"]
+position = Vector2(1482, 106)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rana/Area2D"]
+position = Vector2(-1184.5, 469.5)
+shape = SubResource("RectangleShape2D_8uhcb")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="Rana/Area2D" to="Rana" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
