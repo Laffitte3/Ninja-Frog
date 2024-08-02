@@ -3,6 +3,8 @@ extends Node
 var posx: float =0
 var posy: float =0
 
+
+
 func crearFruta():
 		var platano = preload("res://bananas-reutilizables.tscn")
 		var self_platano=platano.instantiate()

@@ -220,7 +220,7 @@ position = Vector2(1600, 144)
 texture = ExtResource("1_20uta")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(808, 150)
+position = Vector2(806, 140)
 shape = SubResource("RectangleShape2D_agvnk")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
